@@ -1,1 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oxaaam Rewards | Official Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
+    body {
+      background: #08080a;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 6%;
+      background: rgba(15, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+
+    .brand span {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .admin-btn {
+      background: linear-gradient(135deg, #ffd700, #ff8800);
+      color: #000;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+      transition: 0.3s;
+    }
+
+    .admin-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 140px 20px 60px;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.08) 0%, rgba(8, 8, 10, 1) 70%);
+    }
+
+    .hero-logo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ffffff, #ffd700, #ff8800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      font-size: 1rem;
+    }
+
+    /* SECTIONS */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ffd700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* REWARDS GRID */
+    .rewards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+    }
+
+    .reward-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+
+    .reward-card:hover {
+      transform: translateY(-8px);
+      border-color: #ffd700;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+    }
+
+    .reward-icon {
+      font-size: 2.8rem;
+      color: #ffd700;
+      margin-bottom: 15px;
+    }
+
+    .reward-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .reward-card p {
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* GIVEAWAY WINNER SECTION */
+    .giveaway-box {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 136, 0, 0.05));
+      border: 2px solid #ffd700;
+      border-radius: 20px;
+      padding: 40px 25px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+    }
+
+    .giveaway-box i {
+      font-size: 3rem;
+      color: #ffd700;
+      margin-bottom: 15px;
+    }
+
+    .input-group {
+      margin: 20px 0;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      background: #121216;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #ffd700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .claim-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ffd700, #ff8800);
+      color: #000;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .claim-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    .status-msg {
+      margin-top: 15px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .notice-box {
+      margin-top: 20px;
+      padding: 12px;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 8px;
+      color: #ffd700;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: #555;
+      font-size: 0.85rem;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="brand">
+      <img src="logo.png" alt="Oxaaam Rewards Logo">
+      <span>OXAAAM REWARDS</span>
+    </div>
+    <a href="#" class="admin-btn" onclick="alert('Admin Login Portal is restricted to authorized server staff.')">
+      <i class="fa-solid fa-user-shield"></i> Admin Login
+    </a>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <img src="logo.png" alt="Oxaaam Rewards Logo" class="hero-logo">
+    <h1>Oxaaam Rewards Portal</h1>
+    <p>Redeem your exclusive Minecraft rewards, FCFA accounts, and giveaway prizes directly from our official hub.</p>
+  </section>
+
+  <div class="container">
+    <!-- REWARDS SECTION -->
+    <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Available Rewards</h2>
+    <div class="rewards-grid">
+      <div class="reward-card">
+        <i class="fa-solid fa-cube reward-icon"></i>
+        <h3>MCFA Account</h3>
+        <p>Full Access Minecraft Java Edition Account with full migration control.</p>
+      </div>
+
+      <div class="reward-card">
+        <i class="fa-solid fa-key reward-icon"></i>
+        <h3>Minecraft Redeem Code</h3>
+        <p>Official digital code to redeem directly on Microsoft or Minecraft.net.</p>
+      </div>
+
+      <div class="reward-card">
+        <i class="fa-solid fa-gift reward-icon"></i>
+        <h3>Extra Rewards</h3>
+        <p>Special Discord Nitro perks, custom roles, and exclusive community bonuses.</p>
+      </div>
+    </div>
+
+    <!-- GIVEAWAY WINNER SECTION -->
+    <div class="giveaway-box">
+      <i class="fa-solid fa-award"></i>
+      <h2 style="color: #fff;">Giveaway Winner Claim</h2>
+      <p style="color: #aaa; font-size: 0.9rem; margin-top: 5px;">Enter your secret winner code below to submit your claim.</p>
+
+      <div class="input-group">
+        <input type="text" id="claimCode" placeholder="Enter Code (e.g. GCLAIM-XXXXXX)" required>
+      </div>
+      <div class="input-group">
+        <input type="text" id="discordUser" placeholder="Your Discord Username (e.g. user#1234)" required>
+      </div>
+
+      <button class="claim-btn" onclick="submitClaim()">Submit Claim</button>
+
+      <div id="statusMsg" class="status-msg"></div>
+
+      <div class="notice-box">
+        <i class="fa-solid fa-clock"></i> <strong>Please Note:</strong> All reward verification and delivery processes take up to <strong>72 hours</strong>. Status updates will be sent to our Discord.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Oxaaam Rewards. All rights reserved.
+  </footer>
+
+  <script>
+    async function submitClaim() {
+      const code = document.getElementById('claimCode').value.trim();
+      const user = document.getElementById('discordUser').value.trim();
+      const status = document.getElementById('statusMsg');
+
+      if (!code || !user) {
+        status.style.display = 'block';
+        status.style.color = '#ff4d4d';
+        status.textContent = '❌ Please fill in both fields!';
+        return;
+      }
+
+      // PASTE YOUR DISCORD WEBHOOK URL HERE
+      const WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+
+      status.style.display = 'block';
+      status.style.color = '#ffd700';
+      status.textContent = '⏳ Submitting your claim...';
+
+      try {
+        if (WEBHOOK_URL !== "YOUR_DISCORD_WEBHOOK_URL_HERE") {
+          await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              embeds: [{
+                title: "🎉 New Website Claim Submitted!",
+                color: 16766720,
+                fields: [
+                  { name: "Discord User", value: user, inline: true },
+                  { name: "Claim Code", value: `\`${code}\``, inline: true },
+                  { name: "Status", value: "Pending Delivery (72 Hours Notice)", inline: false }
+                ],
+                timestamp: new Date().toISOString()
+              }]
+            })
+          });
+        }
+
+        status.style.color = '#4dff88';
+        status.textContent = '✅ Claim submitted successfully! Please wait up to 72 hours for delivery.';
+        document.getElementById('claimCode').value = '';
+        document.getElementById('discordUser').value = '';
+      } catch (err) {
+        status.style.color = '#ff4d4d';
+        status.textContent = '❌ Error submitting claim. Try again later.';
+      }
+    }
+  </script>
+</body>
+</html>
