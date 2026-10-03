@@ -494,7 +494,7 @@
       closeAuthModal();
     }
 
-    // CLAIM MODAL & STRICT PREFIX VALIDATION LOGIC
+    // CLAIM MODAL LOGIC
     function openClaimModal(rewardType) {
       if (!loggedInUser) {
         alert("⚠️ Please Login / Sign Up first to claim rewards!");
@@ -508,7 +508,6 @@
       const codeInput = document.getElementById('modalClaimCode');
       const hintLabel = document.getElementById('codeFormatHint');
       
-      // Setup dynamic format hints and placeholders per category
       if (rewardType === 'MCFA Account') {
         codeInput.placeholder = "e.g. MCFA-A1B2C3D4";
         hintLabel.textContent = "Required Format: Starts with MCFA-";
@@ -531,6 +530,17 @@
       document.getElementById('modalStatusMsg').style.display = 'none';
     }
 
+    // REDEEMED CODES TRACKER FUNCTIONS
+    function getUsedCodes() {
+      return JSON.parse(localStorage.getItem('oxaaam_used_codes') || '[]');
+    }
+
+    function markCodeAsUsed(code) {
+      let used = getUsedCodes();
+      used.push(code);
+      localStorage.setItem('oxaaam_used_codes', JSON.stringify(used));
+    }
+
     async function submitModalClaim() {
       const code = document.getElementById('modalClaimCode').value.trim().toUpperCase();
       const dcUser = document.getElementById('modalDiscordUser').value.trim();
@@ -543,9 +553,17 @@
         return;
       }
 
-      // CATEGORY-WISE STRICT PREFIX CHECKING
-      let isValidPrefix = false;
+      // 1. CHECK IF CODE IS ALREADY REDEEMED
+      const usedCodes = getUsedCodes();
+      if (usedCodes.includes(code)) {
+        status.style.display = 'block';
+        status.style.color = '#ff4d4d';
+        status.textContent = '❌ This code has already been redeemed!';
+        return;
+      }
 
+      // 2. CATEGORY PREFIX VALIDATION
+      let isValidPrefix = false;
       if (selectedRewardType === 'MCFA Account' && code.startsWith('MCFA-')) {
         isValidPrefix = true;
       } else if (selectedRewardType === 'Minecraft Redeem Code' && code.startsWith('TIER1-')) {
@@ -559,7 +577,7 @@
       if (!isValidPrefix) {
         status.style.display = 'block';
         status.style.color = '#ff4d4d';
-        status.textContent = `❌ Invalid Code Prefix for ${selectedRewardType}! Please check your code format.`;
+        status.textContent = `❌ Invalid Code Prefix for ${selectedRewardType}!`;
         return;
       }
 
@@ -580,12 +598,15 @@
                 { name: "Discord User", value: dcUser, inline: true },
                 { name: "Claim Code", value: "`" + code + "`", inline: true },
                 { name: "Reward Category", value: selectedRewardType, inline: false },
-                { name: "Status", value: "Verified Prefix - Pending Delivery (72 Hours Notice)", inline: false }
+                { name: "Status", value: "Verified & Locked - Pending Delivery", inline: false }
               ],
               timestamp: new Date().toISOString()
             }]
           })
         });
+
+        // LOCK THE CODE (DOBARA REDEEM NA HO)
+        markCodeAsUsed(code);
 
         status.style.color = '#4dff88';
         status.textContent = '✅ Claim submitted! Delivery within 72 hours.';
@@ -601,5 +622,4 @@
     }
   </script>
 </body>
-                                     </html>
-        
+</html>
