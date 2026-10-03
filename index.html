@@ -260,6 +260,14 @@
 
     .input-group {
       margin: 15px 0;
+      text-align: left;
+    }
+
+    .input-group label {
+      font-size: 0.8rem;
+      color: #ffd700;
+      margin-bottom: 5px;
+      display: block;
     }
 
     .input-group input {
@@ -302,6 +310,7 @@
       border-radius: 8px;
       color: #ffd700;
       font-size: 0.8rem;
+      text-align: center;
     }
 
     footer {
@@ -397,11 +406,12 @@
   <div class="modal-overlay" id="claimModal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeClaimModal()">&times;</span>
-      <h2 id="modalRewardTitle" style="color: #ffd700; margin-bottom: 10px;">Claim Reward</h2>
+      <h2 id="modalRewardTitle" style="color: #ffd700; margin-bottom: 5px;">Claim Reward</h2>
       <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px;">Enter your code and Discord details below.</p>
 
       <div class="input-group">
-        <input type="text" id="modalClaimCode" placeholder="Enter Code (e.g., TIER1-XXXXXX)" required>
+        <label id="codeFormatHint">Required Prefix: CODE-</label>
+        <input type="text" id="modalClaimCode" placeholder="Enter Code" required autocomplete="off">
       </div>
       <div class="input-group">
         <input type="text" id="modalDiscordUser" placeholder="Discord Username (e.g. user#1234)" required>
@@ -426,7 +436,6 @@
     let isSignUpMode = false;
     let loggedInUser = localStorage.getItem('oxaaam_logged_user') || null;
 
-    // YOUR DISCORD WEBHOOK URL ADDED HERE
     const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1555896133778407474/2S0K0sAPEnybFS_o_3wZoFs-U-jsP9qqOUy5QlDfqhOQqpJn5XDc3MibwBChO_GTy-dv";
 
     window.onload = function() {
@@ -485,25 +494,45 @@
       closeAuthModal();
     }
 
-    // CLAIM MODAL FUNCTIONS
+    // CLAIM MODAL & STRICT PREFIX VALIDATION LOGIC
     function openClaimModal(rewardType) {
       if (!loggedInUser) {
         alert("⚠️ Please Login / Sign Up first to claim rewards!");
         openAuthModal();
         return;
       }
+
       selectedRewardType = rewardType;
       document.getElementById('modalRewardTitle').textContent = "Claim " + rewardType;
+      
+      const codeInput = document.getElementById('modalClaimCode');
+      const hintLabel = document.getElementById('codeFormatHint');
+      
+      // Setup dynamic format hints and placeholders per category
+      if (rewardType === 'MCFA Account') {
+        codeInput.placeholder = "e.g. MCFA-A1B2C3D4";
+        hintLabel.textContent = "Required Format: Starts with MCFA-";
+      } else if (rewardType === 'Minecraft Redeem Code') {
+        codeInput.placeholder = "e.g. TIER1-A1B2C3D4";
+        hintLabel.textContent = "Required Format: Starts with TIER1-";
+      } else if (rewardType === 'Extra Reward') {
+        codeInput.placeholder = "e.g. EXTRA-A1B2C3D4 or TIER1-A1B2C3D4";
+        hintLabel.textContent = "Required Format: Starts with EXTRA- or TIER1-";
+      } else if (rewardType === 'Giveaway Winner Prize') {
+        codeInput.placeholder = "e.g. GW-A1B2C3D4 or GCLAIM-A1B2C3D4";
+        hintLabel.textContent = "Required Format: Starts with GW- or GCLAIM-";
+      }
+
       document.getElementById('claimModal').style.display = 'flex';
     }
 
-    closeClaimModal = function() {
+    function closeClaimModal() {
       document.getElementById('claimModal').style.display = 'none';
       document.getElementById('modalStatusMsg').style.display = 'none';
     }
 
     async function submitModalClaim() {
-      const code = document.getElementById('modalClaimCode').value.trim();
+      const code = document.getElementById('modalClaimCode').value.trim().toUpperCase();
       const dcUser = document.getElementById('modalDiscordUser').value.trim();
       const status = document.getElementById('modalStatusMsg');
 
@@ -511,6 +540,26 @@
         status.style.display = 'block';
         status.style.color = '#ff4d4d';
         status.textContent = '❌ Please enter all details!';
+        return;
+      }
+
+      // CATEGORY-WISE STRICT PREFIX CHECKING
+      let isValidPrefix = false;
+
+      if (selectedRewardType === 'MCFA Account' && code.startsWith('MCFA-')) {
+        isValidPrefix = true;
+      } else if (selectedRewardType === 'Minecraft Redeem Code' && code.startsWith('TIER1-')) {
+        isValidPrefix = true;
+      } else if (selectedRewardType === 'Extra Reward' && (code.startsWith('EXTRA-') || code.startsWith('TIER1-'))) {
+        isValidPrefix = true;
+      } else if (selectedRewardType === 'Giveaway Winner Prize' && (code.startsWith('GW-') || code.startsWith('GCLAIM-'))) {
+        isValidPrefix = true;
+      }
+
+      if (!isValidPrefix) {
+        status.style.display = 'block';
+        status.style.color = '#ff4d4d';
+        status.textContent = `❌ Invalid Code Prefix for ${selectedRewardType}! Please check your code format.`;
         return;
       }
 
@@ -531,7 +580,7 @@
                 { name: "Discord User", value: dcUser, inline: true },
                 { name: "Claim Code", value: "`" + code + "`", inline: true },
                 { name: "Reward Category", value: selectedRewardType, inline: false },
-                { name: "Status", value: "Pending Delivery (72 Hours Notice)", inline: false }
+                { name: "Status", value: "Verified Prefix - Pending Delivery (72 Hours Notice)", inline: false }
               ],
               timestamp: new Date().toISOString()
             }]
@@ -552,4 +601,5 @@
     }
   </script>
 </body>
-</html>
+                                     </html>
+        
