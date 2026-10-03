@@ -57,14 +57,36 @@
       -webkit-text-fill-color: transparent;
     }
 
+    .nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+
+    .auth-btn {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid #ffd700;
+      color: #ffd700;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+
+    .auth-btn:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
     .admin-btn {
       background: linear-gradient(135deg, #ffd700, #ff8800);
       color: #000;
-      padding: 9px 20px;
+      padding: 8px 16px;
       border-radius: 8px;
       font-weight: 700;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
       transition: 0.3s;
     }
@@ -82,8 +104,8 @@
     }
 
     .hero-logo {
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       border: 3px solid #ffd700;
       box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
@@ -116,7 +138,7 @@
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 20px 20px 60px;
     }
 
     .section-title {
@@ -144,13 +166,14 @@
       padding: 30px 20px;
       text-align: center;
       backdrop-filter: blur(10px);
+      cursor: pointer;
       transition: 0.3s;
     }
 
     .reward-card:hover {
       transform: translateY(-8px);
       border-color: #ffd700;
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
     }
 
     .reward-icon {
@@ -167,6 +190,14 @@
     .reward-card p {
       color: #888;
       font-size: 0.9rem;
+    }
+
+    .reward-card .click-hint {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: #ffd700;
+      font-weight: 600;
     }
 
     /* GIVEAWAY WINNER SECTION */
@@ -187,33 +218,71 @@
       margin-bottom: 15px;
     }
 
+    /* MODAL POPUPS */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #121216;
+      border: 2px solid #ffd700;
+      border-radius: 16px;
+      padding: 30px 25px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #aaa;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
     .input-group {
-      margin: 20px 0;
+      margin: 15px 0;
     }
 
     .input-group input {
       width: 100%;
-      padding: 14px 18px;
-      border-radius: 10px;
+      padding: 12px 16px;
+      border-radius: 8px;
       border: 1px solid rgba(255, 215, 0, 0.3);
-      background: #121216;
+      background: #1a1a22;
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.95rem;
       outline: none;
       text-align: center;
-      transition: 0.3s;
     }
 
     .input-group input:focus {
       border-color: #ffd700;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
 
-    .claim-btn {
+    .submit-btn {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       background: linear-gradient(135deg, #ffd700, #ff8800);
       color: #000;
       font-size: 1rem;
@@ -222,24 +291,17 @@
       transition: 0.3s;
     }
 
-    .claim-btn:hover {
+    .submit-btn:hover {
       opacity: 0.9;
-      transform: scale(1.02);
-    }
-
-    .status-msg {
-      margin-top: 15px;
-      font-size: 0.95rem;
-      display: none;
     }
 
     .notice-box {
-      margin-top: 20px;
-      padding: 12px;
+      margin-top: 15px;
+      padding: 10px;
       background: rgba(255, 215, 0, 0.1);
       border-radius: 8px;
       color: #ffd700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     footer {
@@ -248,7 +310,6 @@
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       color: #555;
       font-size: 0.85rem;
-      margin-top: 40px;
     }
   </style>
 </head>
@@ -260,38 +321,44 @@
       <img src="logo.png" alt="Oxaaam Rewards Logo">
       <span>OXAAAM REWARDS</span>
     </div>
-    <a href="#" class="admin-btn" onclick="alert('Admin Login Portal is restricted to authorized server staff.')">
-      <i class="fa-solid fa-user-shield"></i> Admin Login
-    </a>
+    <div class="nav-btns">
+      <button class="auth-btn" id="userAccountBtn" onclick="openAuthModal()">Login / Sign Up</button>
+      <a href="#" class="admin-btn" onclick="alert('Admin Portal is restricted to server staff.')">
+        <i class="fa-solid fa-user-shield"></i> Admin
+      </a>
+    </div>
   </nav>
 
   <!-- HERO SECTION -->
   <section class="hero">
     <img src="logo.png" alt="Oxaaam Rewards Logo" class="hero-logo">
     <h1>Oxaaam Rewards Portal</h1>
-    <p>Redeem your exclusive Minecraft rewards, FCFA accounts, and giveaway prizes directly from our official hub.</p>
+    <p>Click on any reward below or enter your giveaway code to claim instantly!</p>
   </section>
 
   <div class="container">
     <!-- REWARDS SECTION -->
-    <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Available Rewards</h2>
+    <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Choose Your Reward</h2>
     <div class="rewards-grid">
-      <div class="reward-card">
+      <div class="reward-card" onclick="openClaimModal('MCFA Account')">
         <i class="fa-solid fa-cube reward-icon"></i>
         <h3>MCFA Account</h3>
         <p>Full Access Minecraft Java Edition Account with full migration control.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Enter Code</span>
       </div>
 
-      <div class="reward-card">
+      <div class="reward-card" onclick="openClaimModal('Minecraft Redeem Code')">
         <i class="fa-solid fa-key reward-icon"></i>
         <h3>Minecraft Redeem Code</h3>
         <p>Official digital code to redeem directly on Microsoft or Minecraft.net.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Enter Code</span>
       </div>
 
-      <div class="reward-card">
+      <div class="reward-card" onclick="openClaimModal('Extra Reward')">
         <i class="fa-solid fa-gift reward-icon"></i>
         <h3>Extra Rewards</h3>
-        <p>Special Discord Nitro perks, custom roles, and exclusive community bonuses.</p>
+        <p>Special Discord Nitro perks, custom roles, and exclusive bonuses.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Enter Code</span>
       </div>
     </div>
 
@@ -299,21 +366,53 @@
     <div class="giveaway-box">
       <i class="fa-solid fa-award"></i>
       <h2 style="color: #fff;">Giveaway Winner Claim</h2>
-      <p style="color: #aaa; font-size: 0.9rem; margin-top: 5px;">Enter your secret winner code below to submit your claim.</p>
+      <p style="color: #aaa; font-size: 0.9rem; margin-top: 5px; margin-bottom: 20px;">Won a giveaway? Click below to redeem your prize code.</p>
+      <button class="submit-btn" onclick="openClaimModal('Giveaway Winner Prize')">Claim Giveaway Prize</button>
+      <div class="notice-box">
+        <i class="fa-solid fa-clock"></i> <strong>Note:</strong> Reward processing takes up to <strong>72 hours</strong>. Status updates are sent via Discord.
+      </div>
+    </div>
+  </div>
 
+  <!-- AUTHENTICATION MODAL (LOGIN/SIGNUP) -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAuthModal()">&times;</span>
+      <h2 id="authTitle" style="color: #ffd700; margin-bottom: 15px;">Account Login</h2>
       <div class="input-group">
-        <input type="text" id="claimCode" placeholder="Enter Code (e.g. GCLAIM-XXXXXX)" required>
+        <input type="text" id="authUsername" placeholder="Enter Username">
       </div>
       <div class="input-group">
-        <input type="text" id="discordUser" placeholder="Your Discord Username (e.g. user#1234)" required>
+        <input type="password" id="authPassword" placeholder="Enter Password">
+      </div>
+      <button class="submit-btn" onclick="processAuth()" id="authSubmitBtn">Login</button>
+      <p style="margin-top: 15px; font-size: 0.85rem; color: #aaa;">
+        <span id="authToggleText">Don't have an account?</span> 
+        <a href="#" style="color: #ffd700;" onclick="toggleAuthMode()" id="authToggleLink">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- CLAIM CODE MODAL -->
+  <div class="modal-overlay" id="claimModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeClaimModal()">&times;</span>
+      <h2 id="modalRewardTitle" style="color: #ffd700; margin-bottom: 10px;">Claim Reward</h2>
+      <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px;">Enter your code and Discord details below.</p>
+
+      <div class="input-group">
+        <input type="text" id="modalClaimCode" placeholder="Enter Code (e.g., TIER1-XXXXXX)" required>
+      </div>
+      <div class="input-group">
+        <input type="text" id="modalDiscordUser" placeholder="Discord Username (e.g. user#1234)" required>
       </div>
 
-      <button class="claim-btn" onclick="submitClaim()">Submit Claim</button>
+      <button class="submit-btn" onclick="submitModalClaim()">Submit Request</button>
 
-      <div id="statusMsg" class="status-msg"></div>
+      <div id="modalStatusMsg" style="margin-top: 15px; font-size: 0.85rem; display: none;"></div>
 
       <div class="notice-box">
-        <i class="fa-solid fa-clock"></i> <strong>Please Note:</strong> All reward verification and delivery processes take up to <strong>72 hours</strong>. Status updates will be sent to our Discord.
+        <i class="fa-solid fa-clock"></i> Delivery time: <strong>72 Hours</strong>.
       </div>
     </div>
   </div>
@@ -323,52 +422,132 @@
   </footer>
 
   <script>
-    async function submitClaim() {
-      const code = document.getElementById('claimCode').value.trim();
-      const user = document.getElementById('discordUser').value.trim();
-      const status = document.getElementById('statusMsg');
+    let selectedRewardType = "";
+    let isSignUpMode = false;
+    let loggedInUser = localStorage.getItem('oxaaam_logged_user') || null;
 
-      if (!code || !user) {
+    // YOUR DISCORD WEBHOOK URL ADDED HERE
+    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1555896133778407474/2S0K0sAPEnybFS_o_3wZoFs-U-jsP9qqOUy5QlDfqhOQqpJn5XDc3MibwBChO_GTy-dv";
+
+    window.onload = function() {
+      if (loggedInUser) {
+        document.getElementById('userAccountBtn').textContent = "👤 " + loggedInUser;
+      }
+    };
+
+    // AUTH MODAL FUNCTIONS
+    function openAuthModal() {
+      if (loggedInUser) {
+        if (confirm("Logout from " + loggedInUser + "?")) {
+          localStorage.removeItem('oxaaam_logged_user');
+          loggedInUser = null;
+          document.getElementById('userAccountBtn').textContent = "Login / Sign Up";
+        }
+        return;
+      }
+      document.getElementById('authModal').style.display = 'flex';
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+    }
+
+    function toggleAuthMode() {
+      isSignUpMode = !isSignUpMode;
+      document.getElementById('authTitle').textContent = isSignUpMode ? "Create Account" : "Account Login";
+      document.getElementById('authSubmitBtn').textContent = isSignUpMode ? "Sign Up" : "Login";
+      document.getElementById('authToggleText').textContent = isSignUpMode ? "Already have an account?" : "Don't have an account?";
+      document.getElementById('authToggleLink').textContent = isSignUpMode ? "Login" : "Sign Up";
+    }
+
+    function processAuth() {
+      const u = document.getElementById('authUsername').value.trim();
+      const p = document.getElementById('authPassword').value.trim();
+
+      if (!u || !p) return alert("Please fill all fields!");
+
+      if (isSignUpMode) {
+        localStorage.setItem('user_' + u, p);
+        alert("Account created successfully! Logging in...");
+        loggedInUser = u;
+      } else {
+        const storedP = localStorage.getItem('user_' + u);
+        if (storedP === p) {
+          alert("Login successful!");
+          loggedInUser = u;
+        } else {
+          return alert("Invalid username or password!");
+        }
+      }
+
+      localStorage.setItem('oxaaam_logged_user', loggedInUser);
+      document.getElementById('userAccountBtn').textContent = "👤 " + loggedInUser;
+      closeAuthModal();
+    }
+
+    // CLAIM MODAL FUNCTIONS
+    function openClaimModal(rewardType) {
+      if (!loggedInUser) {
+        alert("⚠️ Please Login / Sign Up first to claim rewards!");
+        openAuthModal();
+        return;
+      }
+      selectedRewardType = rewardType;
+      document.getElementById('modalRewardTitle').textContent = "Claim " + rewardType;
+      document.getElementById('claimModal').style.display = 'flex';
+    }
+
+    closeClaimModal = function() {
+      document.getElementById('claimModal').style.display = 'none';
+      document.getElementById('modalStatusMsg').style.display = 'none';
+    }
+
+    async function submitModalClaim() {
+      const code = document.getElementById('modalClaimCode').value.trim();
+      const dcUser = document.getElementById('modalDiscordUser').value.trim();
+      const status = document.getElementById('modalStatusMsg');
+
+      if (!code || !dcUser) {
         status.style.display = 'block';
         status.style.color = '#ff4d4d';
-        status.textContent = '❌ Please fill in both fields!';
+        status.textContent = '❌ Please enter all details!';
         return;
       }
 
-      // PASTE YOUR DISCORD WEBHOOK URL HERE
-      const WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
-
       status.style.display = 'block';
       status.style.color = '#ffd700';
-      status.textContent = '⏳ Submitting your claim...';
+      status.textContent = '⏳ Submitting claim...';
 
       try {
-        if (WEBHOOK_URL !== https://discord.com/api/webhooks/1555896133778407474/2S0K0sAPEnybFS_o_3wZoFs-U-jsP9qqOUy5QlDfqhOQqpJn5XDc3MibwBChO_GTy-dv) {
-          await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              embeds: [{
-                title: "🎉 New Website Claim Submitted!",
-                color: 16766720,
-                fields: [
-                  { name: "Discord User", value: user, inline: true },
-                  { name: "Claim Code", value: `\`${code}\``, inline: true },
-                  { name: "Status", value: "Pending Delivery (72 Hours Notice)", inline: false }
-                ],
-                timestamp: new Date().toISOString()
-              }]
-            })
-          });
-        }
+        await fetch(DISCORD_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            embeds: [{
+              title: "🎁 New Reward Claim Request",
+              color: 16766720,
+              fields: [
+                { name: "Website Account", value: loggedInUser, inline: true },
+                { name: "Discord User", value: dcUser, inline: true },
+                { name: "Claim Code", value: "`" + code + "`", inline: true },
+                { name: "Reward Category", value: selectedRewardType, inline: false },
+                { name: "Status", value: "Pending Delivery (72 Hours Notice)", inline: false }
+              ],
+              timestamp: new Date().toISOString()
+            }]
+          })
+        });
 
         status.style.color = '#4dff88';
-        status.textContent = '✅ Claim submitted successfully! Please wait up to 72 hours for delivery.';
-        document.getElementById('claimCode').value = '';
-        document.getElementById('discordUser').value = '';
-      } catch (err) {
+        status.textContent = '✅ Claim submitted! Delivery within 72 hours.';
+        setTimeout(() => {
+          closeClaimModal();
+          document.getElementById('modalClaimCode').value = '';
+          document.getElementById('modalDiscordUser').value = '';
+        }, 2000);
+      } catch (e) {
         status.style.color = '#ff4d4d';
-        status.textContent = '❌ Error submitting claim. Try again later.';
+        status.textContent = '❌ Error submitting claim. Try again!';
       }
     }
   </script>
