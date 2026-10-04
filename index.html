@@ -630,3 +630,34 @@
           body: JSON.stringify({
             embeds: [{
               title: "🎁 New Reward Claim Request",
+              color: 16766720,
+              fields: [
+                { name: "Website Account", value: loggedInUser, inline: true },
+                { name: "Discord User", value: dcUser, inline: true },
+                { name: "Claim Code", value: "`" + code + "`", inline: true },
+                { name: "Reward Category", value: categoryText, inline: false },
+                { name: "Status", value: "Verified & Locked - Pending Delivery", inline: false }
+              ],
+              timestamp: new Date().toISOString()
+            }]
+          })
+        });
+
+        // LOCK THE CODE (ONE TIME REDEEM ONLY)
+        markCodeAsUsed(code);
+
+        status.style.color = '#4dff88';
+        status.textContent = '✅ Claim submitted! Delivery within 72 hours.';
+        setTimeout(() => {
+          closeClaimModal();
+          document.getElementById('modalClaimCode').value = '';
+          document.getElementById('modalDiscordUser').value = '';
+        }, 2000);
+      } catch (e) {
+        status.style.color = '#ff4d4d';
+        status.textContent = '❌ Error submitting claim. Please try again!';
+      }
+    }
+  </script>
+</body>
+</html>
