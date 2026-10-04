@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oxaaam Rewards | Official Portal</title>
+  <title>Oxaaam Rewards | Official Redeem Portal</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -239,7 +239,7 @@
       border-radius: 16px;
       padding: 30px 25px;
       width: 90%;
-      max-width: 420px;
+      max-width: 440px;
       text-align: center;
       position: relative;
       box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
@@ -270,7 +270,7 @@
       display: block;
     }
 
-    .input-group input {
+    .input-group input, .input-group select {
       width: 100%;
       padding: 12px 16px;
       border-radius: 8px;
@@ -279,10 +279,9 @@
       color: #fff;
       font-size: 0.95rem;
       outline: none;
-      text-align: center;
     }
 
-    .input-group input:focus {
+    .input-group input:focus, .input-group select:focus {
       border-color: #ffd700;
     }
 
@@ -342,41 +341,65 @@
   <section class="hero">
     <img src="logo.png" alt="Oxaaam Rewards Logo" class="hero-logo">
     <h1>Oxaaam Rewards Portal</h1>
-    <p>Click on any reward below or enter your giveaway code to claim instantly!</p>
+    <p>Select your reward category and enter your code to claim instantly!</p>
   </section>
 
   <div class="container">
     <!-- REWARDS SECTION -->
-    <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Choose Your Reward</h2>
+    <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Choose Your Reward Category</h2>
     <div class="rewards-grid">
-      <div class="reward-card" onclick="openClaimModal('MCFA Account')">
+      <div class="reward-card" onclick="openClaimModal('MCFA')">
         <i class="fa-solid fa-cube reward-icon"></i>
         <h3>MCFA Account</h3>
         <p>Full Access Minecraft Java Edition Account with full migration control.</p>
-        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Enter Code</span>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Redeem Code</span>
       </div>
 
-      <div class="reward-card" onclick="openClaimModal('Minecraft Redeem Code')">
+      <div class="reward-card" onclick="openClaimModal('NITROB')">
+        <i class="fa-solid fa-bolt reward-icon"></i>
+        <h3>Nitro Basic Monthly</h3>
+        <p>Discord Nitro Basic Monthly subscription code.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Redeem Code</span>
+      </div>
+
+      <div class="reward-card" onclick="openClaimModal('ROBUX50')">
+        <i class="fa-solid fa-coins reward-icon"></i>
+        <h3>Robux $50 Giftcard</h3>
+        <p>Roblox official digital giftcard redeem code.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Redeem Code</span>
+      </div>
+
+      <div class="reward-card" onclick="openClaimModal('MCRC')">
         <i class="fa-solid fa-key reward-icon"></i>
         <h3>Minecraft Redeem Code</h3>
         <p>Official digital code to redeem directly on Microsoft or Minecraft.net.</p>
-        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Enter Code</span>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Redeem Code</span>
       </div>
 
-      <div class="reward-card" onclick="openClaimModal('Extra Reward')">
-        <i class="fa-solid fa-gift reward-icon"></i>
-        <h3>Extra Rewards</h3>
-        <p>Special Discord Nitro perks, custom roles, and exclusive bonuses.</p>
-        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Enter Code</span>
+      <div class="reward-card" onclick="openClaimModal('NITROBST')">
+        <i class="fa-solid fa-rocket reward-icon"></i>
+        <h3>Nitro Boost Monthly</h3>
+        <p>Discord Nitro Boost Monthly subscription code with 2 server boosts.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Redeem Code</span>
+      </div>
+
+      <div class="reward-card" onclick="openClaimModal('ROBLOX100')">
+        <i class="fa-solid fa-gem reward-icon"></i>
+        <h3>Roblox $100 Giftcard</h3>
+        <p>Roblox high-tier digital giftcard redeem code.</p>
+        <span class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Click to Redeem Code</span>
       </div>
     </div>
 
     <!-- GIVEAWAY WINNER SECTION -->
     <div class="giveaway-box">
       <i class="fa-solid fa-award"></i>
-      <h2 style="color: #fff;">Giveaway Winner Claim</h2>
-      <p style="color: #aaa; font-size: 0.9rem; margin-top: 5px; margin-bottom: 20px;">Won a giveaway? Click below to redeem your prize code.</p>
-      <button class="submit-btn" onclick="openClaimModal('Giveaway Winner Prize')">Claim Giveaway Prize</button>
+      <h2 style="color: #fff;">Special Tier & Giveaway Claims</h2>
+      <p style="color: #aaa; font-size: 0.9rem; margin-top: 5px; margin-bottom: 20px;">Redeem your Tier 1 or Giveaway winner claims here.</p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button class="submit-btn" style="max-width: 200px;" onclick="openClaimModal('TIER1')">Claim Tier 1</button>
+        <button class="submit-btn" style="max-width: 200px;" onclick="openClaimModal('GCLAIM')">Claim Giveaway</button>
+      </div>
       <div class="notice-box">
         <i class="fa-solid fa-clock"></i> <strong>Note:</strong> Reward processing takes up to <strong>72 hours</strong>. Status updates are sent via Discord.
       </div>
@@ -406,15 +429,31 @@
   <div class="modal-overlay" id="claimModal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeClaimModal()">&times;</span>
-      <h2 id="modalRewardTitle" style="color: #ffd700; margin-bottom: 5px;">Claim Reward</h2>
-      <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px;">Enter your code and Discord details below.</p>
+      <h2 style="color: #ffd700; margin-bottom: 5px;">Claim Reward</h2>
+      <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px;">Select category and enter code provided by bot.</p>
 
       <div class="input-group">
-        <label id="codeFormatHint">Required Prefix: CODE-</label>
+        <label>Selected Reward Category</label>
+        <select id="modalCategorySelect" onchange="updatePrefixHint()">
+          <option value="MCFA">MCFA (Minecraft Full Access)</option>
+          <option value="NITROB">Nitro Basic Monthly</option>
+          <option value="ROBUX50">Robux $50 Giftcard</option>
+          <option value="MCRC">Minecraft Redeem Code</option>
+          <option value="NITROBST">Nitro Boost Monthly</option>
+          <option value="ROBLOX100">Roblox $100 Giftcard</option>
+          <option value="TIER1">Tier 1 Exclusive Rewards</option>
+          <option value="GCLAIM">Giveaway Rewards</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label id="codeFormatHint">Required Prefix: MCFA-</label>
         <input type="text" id="modalClaimCode" placeholder="Enter Code" required autocomplete="off">
       </div>
+
       <div class="input-group">
-        <input type="text" id="modalDiscordUser" placeholder="Discord Username (e.g. user#1234)" required>
+        <label>Discord Username</label>
+        <input type="text" id="modalDiscordUser" placeholder="e.g. username#0000" required>
       </div>
 
       <button class="submit-btn" onclick="submitModalClaim()">Submit Request</button>
@@ -432,11 +471,21 @@
   </footer>
 
   <script>
-    let selectedRewardType = "";
     let isSignUpMode = false;
     let loggedInUser = localStorage.getItem('oxaaam_logged_user') || null;
 
     const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1555896133778407474/2S0K0sAPEnybFS_o_3wZoFs-U-jsP9qqOUy5QlDfqhOQqpJn5XDc3MibwBChO_GTy-dv";
+
+    const CATEGORY_PREFIXES = {
+      'MCFA': 'MCFA-',
+      'NITROB': 'NITROB-',
+      'ROBUX50': 'ROBUX50-',
+      'MCRC': 'MCRC-',
+      'NITROBST': 'NITROBST-',
+      'ROBLOX100': 'ROBLOX100-',
+      'TIER1': 'TIER1-',
+      'GCLAIM': 'GCLAIM-'
+    };
 
     window.onload = function() {
       if (loggedInUser) {
@@ -495,34 +544,27 @@
     }
 
     // CLAIM MODAL LOGIC
-    function openClaimModal(rewardType) {
+    function openClaimModal(defaultCategoryKey) {
       if (!loggedInUser) {
         alert("⚠️ Please Login / Sign Up first to claim rewards!");
         openAuthModal();
         return;
       }
 
-      selectedRewardType = rewardType;
-      document.getElementById('modalRewardTitle').textContent = "Claim " + rewardType;
-      
-      const codeInput = document.getElementById('modalClaimCode');
-      const hintLabel = document.getElementById('codeFormatHint');
-      
-      if (rewardType === 'MCFA Account') {
-        codeInput.placeholder = "e.g. MCFA-A1B2C3D4";
-        hintLabel.textContent = "Required Format: Starts with MCFA-";
-      } else if (rewardType === 'Minecraft Redeem Code') {
-        codeInput.placeholder = "e.g. TIER1-A1B2C3D4";
-        hintLabel.textContent = "Required Format: Starts with TIER1-";
-      } else if (rewardType === 'Extra Reward') {
-        codeInput.placeholder = "e.g. EXTRA-A1B2C3D4 or TIER1-A1B2C3D4";
-        hintLabel.textContent = "Required Format: Starts with EXTRA- or TIER1-";
-      } else if (rewardType === 'Giveaway Winner Prize') {
-        codeInput.placeholder = "e.g. GW-A1B2C3D4 or GCLAIM-A1B2C3D4";
-        hintLabel.textContent = "Required Format: Starts with GW- or GCLAIM-";
+      const categorySelect = document.getElementById('modalCategorySelect');
+      if (defaultCategoryKey) {
+        categorySelect.value = defaultCategoryKey;
       }
+      updatePrefixHint();
 
       document.getElementById('claimModal').style.display = 'flex';
+    }
+
+    function updatePrefixHint() {
+      const selectedCat = document.getElementById('modalCategorySelect').value;
+      const prefix = CATEGORY_PREFIXES[selectedCat] || '';
+      document.getElementById('codeFormatHint').textContent = "Required Format: Code must start with " + prefix;
+      document.getElementById('modalClaimCode').placeholder = "e.g. " + prefix + "A1B2C3D4";
     }
 
     function closeClaimModal() {
@@ -530,7 +572,7 @@
       document.getElementById('modalStatusMsg').style.display = 'none';
     }
 
-    // REDEEMED CODES TRACKER FUNCTIONS
+    // REDEEMED CODES TRACKER FUNCTIONS (LOCALSTORAGE ONE-TIME USE LOCK)
     function getUsedCodes() {
       return JSON.parse(localStorage.getItem('oxaaam_used_codes') || '[]');
     }
@@ -542,6 +584,8 @@
     }
 
     async function submitModalClaim() {
+      const categoryKey = document.getElementById('modalCategorySelect').value;
+      const categoryText = document.getElementById('modalCategorySelect').options[document.getElementById('modalCategorySelect').selectedIndex].text;
       const code = document.getElementById('modalClaimCode').value.trim().toUpperCase();
       const dcUser = document.getElementById('modalDiscordUser').value.trim();
       const status = document.getElementById('modalStatusMsg');
@@ -549,7 +593,7 @@
       if (!code || !dcUser) {
         status.style.display = 'block';
         status.style.color = '#ff4d4d';
-        status.textContent = '❌ Please enter all details!';
+        status.textContent = '❌ Please fill in all fields!';
         return;
       }
 
@@ -558,26 +602,16 @@
       if (usedCodes.includes(code)) {
         status.style.display = 'block';
         status.style.color = '#ff4d4d';
-        status.textContent = '❌ This code has already been redeemed!';
+        status.textContent = '❌ This code has already been redeemed! Codes are strictly one-time use.';
         return;
       }
 
-      // 2. CATEGORY PREFIX VALIDATION
-      let isValidPrefix = false;
-      if (selectedRewardType === 'MCFA Account' && code.startsWith('MCFA-')) {
-        isValidPrefix = true;
-      } else if (selectedRewardType === 'Minecraft Redeem Code' && code.startsWith('TIER1-')) {
-        isValidPrefix = true;
-      } else if (selectedRewardType === 'Extra Reward' && (code.startsWith('EXTRA-') || code.startsWith('TIER1-'))) {
-        isValidPrefix = true;
-      } else if (selectedRewardType === 'Giveaway Winner Prize' && (code.startsWith('GW-') || code.startsWith('GCLAIM-'))) {
-        isValidPrefix = true;
-      }
-
-      if (!isValidPrefix) {
+      // 2. STRICT CATEGORY PREFIX VALIDATION
+      const expectedPrefix = CATEGORY_PREFIXES[categoryKey];
+      if (!code.startsWith(expectedPrefix)) {
         status.style.display = 'block';
         status.style.color = '#ff4d4d';
-        status.textContent = `❌ Invalid Code Prefix for ${selectedRewardType}!`;
+        status.textContent = `❌ Invalid code for selected category! Codes for this category must start with "${expectedPrefix}".`;
         return;
       }
 
@@ -597,29 +631,5 @@
                 { name: "Website Account", value: loggedInUser, inline: true },
                 { name: "Discord User", value: dcUser, inline: true },
                 { name: "Claim Code", value: "`" + code + "`", inline: true },
-                { name: "Reward Category", value: selectedRewardType, inline: false },
-                { name: "Status", value: "Verified & Locked - Pending Delivery", inline: false }
-              ],
-              timestamp: new Date().toISOString()
-            }]
-          })
-        });
-
-        // LOCK THE CODE (DOBARA REDEEM NA HO)
-        markCodeAsUsed(code);
-
-        status.style.color = '#4dff88';
-        status.textContent = '✅ Claim submitted! Delivery within 72 hours.';
-        setTimeout(() => {
-          closeClaimModal();
-          document.getElementById('modalClaimCode').value = '';
-          document.getElementById('modalDiscordUser').value = '';
-        }, 2000);
-      } catch (e) {
-        status.style.color = '#ff4d4d';
-        status.textContent = '❌ Error submitting claim. Try again!';
-      }
-    }
-  </script>
-</body>
-</html>
+                { name: "Reward Category", value: categoryText, inline: false },
+                { name: "Status", value: "Verified & Locked - Pending Delivery", inline: 
